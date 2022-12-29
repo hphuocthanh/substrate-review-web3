@@ -20,7 +20,7 @@ const FIREFOX_ADDON_URL =
 
 const acctAddr = acct => (acct ? acct.address : '')
 
-function Main(props) {
+function Main (props) {
   const {
     setCurrentAccount,
     state: { keyring, currentAccount },
@@ -51,7 +51,7 @@ function Main(props) {
 
   return (
     <Menu
-      attached="top"
+      attached='top'
       tabular
       style={{
         backgroundColor: '#fff',
@@ -64,18 +64,18 @@ function Main(props) {
         <Menu.Menu>
           <Image
             src={`${process.env.PUBLIC_URL}/assets/substrate-logo.png`}
-            size="mini"
+            size='mini'
           />
         </Menu.Menu>
-        <Menu.Menu position="right" style={{ alignItems: 'center' }}>
+        <Menu.Menu position='right' style={{ alignItems: 'center' }}>
           {!currentAccount ? (
             <span>
               Create an account with Polkadot-JS Extension (
-              <a target="_blank" rel="noreferrer" href={CHROME_EXT_URL}>
+              <a target='_blank' rel='noreferrer' href={CHROME_EXT_URL}>
                 Chrome
               </a>
               ,&nbsp;
-              <a target="_blank" rel="noreferrer" href={FIREFOX_ADDON_URL}>
+              <a target='_blank' rel='noreferrer' href={FIREFOX_ADDON_URL}>
                 Firefox
               </a>
               )&nbsp;
@@ -85,8 +85,8 @@ function Main(props) {
             <Button
               basic
               circular
-              size="large"
-              icon="user"
+              size='large'
+              icon='user'
               color={currentAccount ? 'green' : 'red'}
             />
           </CopyToClipboard>
@@ -94,7 +94,7 @@ function Main(props) {
             search
             selection
             clearable
-            placeholder="Select an account"
+            placeholder='Select an account'
             options={keyringOptions}
             onChange={(_, dropdown) => {
               onChange(dropdown.value)
@@ -108,7 +108,7 @@ function Main(props) {
   )
 }
 
-function BalanceAnnotation(props) {
+function BalanceAnnotation (props) {
   const { api, currentAccount } = useSubstrateState()
   const [accountBalance, setAccountBalance] = useState(0)
 
@@ -129,14 +129,14 @@ function BalanceAnnotation(props) {
   }, [api, currentAccount])
 
   return currentAccount ? (
-    <Label pointing="left">
-      <Icon name="money" color="green" />
+    <Label pointing='left'>
+      <Icon name='money' color='green' />
       {accountBalance}
     </Label>
   ) : null
 }
 
-export default function AccountSelector(props) {
+export default function AccountSelector (props) {
   const { api, keyring } = useSubstrateState()
   return keyring.getPairs && api.query ? <Main {...props} /> : null
 }

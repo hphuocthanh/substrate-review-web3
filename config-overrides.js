@@ -1,6 +1,6 @@
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 
-module.exports = function override(config, env) {
+module.exports = function override (config, env) {
   config.resolve = {
     fallback: {
       stream: require.resolve('stream-browserify'),
