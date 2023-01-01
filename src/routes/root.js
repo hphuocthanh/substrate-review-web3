@@ -1,12 +1,5 @@
 import React, { createRef } from 'react'
-import {
-  Container,
-  Dimmer,
-  Loader,
-  Grid,
-  Sticky,
-  Message,
-} from 'semantic-ui-react'
+import { Dimmer, Loader, Grid, Sticky, Message } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 import { SubstrateContextProvider, useSubstrateState } from '../substrate-lib'
@@ -53,10 +46,8 @@ function Main () {
     <div ref={contextRef}>
       <Sticky context={contextRef}>
         <AccountSelector />
-      </Sticky>{' '}
-      <Container>
-        <Outlet />
-      </Container>{' '}
+      </Sticky>
+      <Outlet />
       <DeveloperConsole />
     </div>
   )

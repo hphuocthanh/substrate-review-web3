@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { useLocation } from 'react-router-dom'
 
 import {
   Menu,
@@ -7,7 +8,6 @@ import {
   Dropdown,
   Container,
   Icon,
-  Image,
   Label,
 } from 'semantic-ui-react'
 
@@ -25,7 +25,7 @@ function Main (props) {
     setCurrentAccount,
     state: { keyring, currentAccount },
   } = useSubstrate()
-
+  const location = useLocation()
   // Get the list of accounts we possess the private key for
   const keyringOptions = keyring.getPairs().map(account => ({
     key: account.address,
@@ -52,7 +52,8 @@ function Main (props) {
   return (
     <Menu
       attached='top'
-      tabular
+      pointing
+      secondary
       style={{
         backgroundColor: '#fff',
         borderColor: '#fff',
@@ -61,11 +62,17 @@ function Main (props) {
       }}
     >
       <Container>
-        <Menu.Menu>
-          <Image
-            src={`${process.env.PUBLIC_URL}/assets/substrate-logo.png`}
-            size='mini'
-          />
+        <Menu.Menu position='left'>
+          <Menu.Item as='a' href='/' active={location.pathname === '/'}>
+            Home
+          </Menu.Item>
+          <Menu.Item
+            as='a'
+            href='reviews'
+            active={location.pathname === '/reviews'}
+          >
+            Reviews
+          </Menu.Item>
         </Menu.Menu>
         <Menu.Menu position='right' style={{ alignItems: 'center' }}>
           {!currentAccount ? (
