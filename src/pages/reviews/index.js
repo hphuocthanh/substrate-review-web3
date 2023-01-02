@@ -1,4 +1,5 @@
-import { Container, Stack } from '@mantine/core'
+import { Container, Divider, Grid, Stack, Title } from '@mantine/core'
+import Categories from './Categories'
 import ReviewCard from './ReviewCard'
 
 const mockData = [
@@ -18,10 +19,20 @@ const mockData = [
 const ReviewList = () => {
   return (
     <Stack>
-      <Container>
-        {mockData?.map(item => (
-          <ReviewCard {...item} key={item.title} />
-        ))}
+      <Container size='lg' mt='md' sx={{ width: '100%' }}>
+        <Title order={2}>Current Projects</Title>
+        <Divider my='lg' />
+
+        <Grid grow>
+          <Grid.Col span={3}>
+            <Categories />
+          </Grid.Col>
+          <Grid.Col span={9}>
+            {mockData?.map(item => (
+              <ReviewCard {...item} key={item.title} />
+            ))}
+          </Grid.Col>
+        </Grid>
       </Container>
     </Stack>
   )
