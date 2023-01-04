@@ -9,6 +9,7 @@ import Root from './routes/root'
 import ErrorPage from './ErrorPage'
 import Home from './pages/home'
 import ReviewList from './pages/reviews'
+import Detail from './pages/detail/detail'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: 'reviews',
         element: <ReviewList />,
+      },
+      {
+        path: 'detail',
+        element: <Detail />,
       },
     ],
   },
