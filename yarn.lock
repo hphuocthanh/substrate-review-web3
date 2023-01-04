@@ -2323,6 +2323,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/form@npm:^5.10.0":
+  version: 5.10.0
+  resolution: "@mantine/form@npm:5.10.0"
+  dependencies:
+    fast-deep-equal: ^3.1.3
+    klona: ^2.0.5
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: a70b649db3036af1ce756adc6f11924e4cca29954b18deb654e7fda4d0254f5da55b0e703224c3981d3fd492a0b77839ee9aa55cce69792073e60a0da5cc070a
+  languageName: node
+  linkType: hard
+
 "@mantine/hooks@npm:^5.9.6":
   version: 5.9.6
   resolution: "@mantine/hooks@npm:5.9.6"
@@ -12784,6 +12796,7 @@ __metadata:
     "@artsy/fresnel": ^6.1.0
     "@emotion/react": ^11.10.5
     "@mantine/core": ^5.9.6
+    "@mantine/form": ^5.10.0
     "@mantine/hooks": ^5.9.6
     "@mantine/notifications": ^5.9.6
     "@polkadot/api": ^7.10.1
