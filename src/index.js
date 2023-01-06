@@ -9,7 +9,10 @@ import Root from './routes/root'
 import ErrorPage from './ErrorPage'
 import Home from './pages/home'
 import ReviewList from './pages/reviews'
+import Detail from './pages/detail/detail'
+
 import ReviewDetail from './pages/reviews/detail'
+
 
 const router = createBrowserRouter([
   {
@@ -35,6 +38,10 @@ const router = createBrowserRouter([
             element: <ReviewDetail />,
           },
         ],
+      },
+      {
+        path: 'detail',
+        element: <Detail />,
       },
     ],
   },

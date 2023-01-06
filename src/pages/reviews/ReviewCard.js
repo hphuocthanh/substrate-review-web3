@@ -8,6 +8,7 @@ import {
   Button,
   Paper,
 } from '@mantine/core'
+import {  Link } from 'react-router-dom'
 
 import ReviewCardDescription from './ReviewCardDescription'
 
@@ -69,6 +70,7 @@ const ReviewCard = body => {
               />
             </Paper>
             <div>
+
               <Text weight={500} component='a' href={`/reviews/tesla`}>
                 Tesla Model S
               </Text>
