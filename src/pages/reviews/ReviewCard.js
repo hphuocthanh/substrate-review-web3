@@ -70,9 +70,10 @@ const ReviewCard = body => {
               />
             </Paper>
             <div>
-              <Link to = '/detail'> 
-                <Text weight={500}>Tesla Model S</Text>
-              </Link>
+
+              <Text weight={500} component='a' href={`/reviews/tesla`}>
+                Tesla Model S
+              </Text>
               <Text size='xs' color='dimmed'>
                 Free recharge at any station
               </Text>

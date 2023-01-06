@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
 
 import App from './App'
 import 'semantic-ui-css/semantic.min.css'
@@ -10,6 +10,9 @@ import ErrorPage from './ErrorPage'
 import Home from './pages/home'
 import ReviewList from './pages/reviews'
 import Detail from './pages/detail/detail'
+
+import ReviewDetail from './pages/reviews/detail'
+
 
 const router = createBrowserRouter([
   {
@@ -27,7 +30,14 @@ const router = createBrowserRouter([
       },
       {
         path: 'reviews',
-        element: <ReviewList />,
+        element: <Outlet />,
+        children: [
+          { index: true, element: <ReviewList /> },
+          {
+            path: ':reviewId',
+            element: <ReviewDetail />,
+          },
+        ],
       },
       {
         path: 'detail',
