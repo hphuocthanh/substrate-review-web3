@@ -57,8 +57,8 @@ function Main (props) {
       style={{
         backgroundColor: '#fff',
         borderColor: '#fff',
-        paddingTop: '1em',
-        paddingBottom: '1em',
+        paddingTop: '0.5em',
+        paddingBottom: '0.5em',
       }}
     >
       <Container>
@@ -69,7 +69,7 @@ function Main (props) {
           <Menu.Item
             as='a'
             href='reviews'
-            active={location.pathname === '/reviews'}
+            active={location.pathname.includes('/reviews')}
           >
             Reviews
           </Menu.Item>

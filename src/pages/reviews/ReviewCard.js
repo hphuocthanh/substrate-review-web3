@@ -8,7 +8,6 @@ import {
   Button,
   Paper,
 } from '@mantine/core'
-import {  Link } from 'react-router-dom'
 
 import ReviewCardDescription from './ReviewCardDescription'
 
@@ -63,23 +62,22 @@ const ReviewCard = body => {
           <Group>
             <Paper shadow='md' p='sm' withBorder>
               <Image
-                src='https://i.imgur.com/ZL52Q2D.png'
-                alt='Tesla Model S'
+                src='https://s2.coinmarketcap.com/static/img/coins/64x64/6756.png'
+                alt='Acala network'
                 width={100}
                 height={100}
               />
             </Paper>
             <div>
-
               <Text weight={500} component='a' href={`/reviews/tesla`}>
-                Tesla Model S
+                Acala network
               </Text>
               <Text size='xs' color='dimmed'>
-                Free recharge at any station
+                Your best financial application
               </Text>
             </div>
           </Group>
-          <Badge variant='outline'>25% off</Badge>
+          <Badge variant='outline'>Ethereum-compatible</Badge>
         </Group>
       </Card.Section>
 

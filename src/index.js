@@ -2,17 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
-
+import { MantineProvider } from '@mantine/core'
+import { NotificationsProvider } from '@mantine/notifications'
 import App from './App'
 import 'semantic-ui-css/semantic.min.css'
 import Root from './routes/root'
 import ErrorPage from './ErrorPage'
 import Home from './pages/home'
 import ReviewList from './pages/reviews'
-import Detail from './pages/detail/detail'
 
 import ReviewDetail from './pages/reviews/detail'
-
 
 const router = createBrowserRouter([
   {
@@ -39,17 +38,17 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: 'detail',
-        element: <Detail />,
-      },
     ],
   },
 ])
 
 ReactDOM.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <MantineProvider withNormalizeCSS withGlobalStyles>
+      <NotificationsProvider>
+        <RouterProvider router={router} />
+      </NotificationsProvider>
+    </MantineProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )

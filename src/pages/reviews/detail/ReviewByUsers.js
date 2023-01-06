@@ -13,7 +13,7 @@ const ReviewByUsers = () => {
       <WriteReviewModal
         opened={opened}
         onClose={() => setOpened(false)}
-        productName='Web3'
+        productName='Acala Network'
       />
     </Stack>
   )

@@ -1,13 +1,13 @@
 import { Container, Divider, Stack } from '@mantine/core'
-import ProductGeneralInfo from './General'
+import ProductOverview from './product'
 import ReviewByUsers from './ReviewByUsers'
 
 const ReviewDetail = () => {
   return (
-    <Stack>
+    <Stack pb='xl'>
+      <ProductOverview />
       <Container>
         <Stack size='lg' mt='md' sx={{ width: '100%' }}>
-          <ProductGeneralInfo />
           <Divider />
           <ReviewByUsers />
         </Stack>

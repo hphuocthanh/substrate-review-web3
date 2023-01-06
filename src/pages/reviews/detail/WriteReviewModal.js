@@ -1,7 +1,7 @@
 import {
-  Button,
   Divider,
   Modal,
+  Rating,
   Select,
   Stack,
   Text,
@@ -9,14 +9,19 @@ import {
   TextInput,
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
+import { showNotification } from '@mantine/notifications'
+import { useEffect, useState } from 'react'
+import { TxButton } from '../../../substrate-lib/components'
 
 const WriteReviewModal = ({
   opened = false,
   onClose,
   productName = 'Web3',
 }) => {
+  const [status, setStatus] = useState(null)
   const form = useForm({
     initialValues: {
+      rating: 0,
       title: '',
       like: '',
       dislike: '',
@@ -29,9 +34,16 @@ const WriteReviewModal = ({
     },
   })
 
-  const handleSubmit = values => {
-    console.log('values', values)
-  }
+  useEffect(() => {
+    console.log('status', status)
+    if (status?.includes('Finalized')) {
+      showNotification({
+        title: <></>,
+        message: 'Review success',
+      })
+      onClose()
+    }
+  }, [status])
 
   return (
     <Modal
@@ -44,13 +56,21 @@ const WriteReviewModal = ({
       transitionDuration={600}
       transitionTimingFunction='ease'
     >
-      <form onSubmit={form.onSubmit(handleSubmit)}>
+      <form onSubmit={form.onSubmit(values => console.log('values', values))}>
         <Stack spacing={'xl'}>
           <Text weight={500} size='xl'>
             {productName}
           </Text>
           <Divider />
 
+          <Text>
+            How likely is it that you would recommend this product to a friend
+            or a colleague?{' '}
+            <Text span color='red'>
+              *
+            </Text>
+          </Text>
+          <Rating size='xl' name='rating' {...form.getInputProps('rating')} />
           <TextInput
             name='title'
             label='Title for your review'
@@ -118,7 +138,66 @@ const WriteReviewModal = ({
             {...form.getInputProps('jobTitle')}
           />
 
-          <Button type='submit'>Submit</Button>
+          <TxButton
+            type='SIGNED-TX'
+            setStatus={setStatus}
+            attrs={{
+              palletRpc: 'reviewModule',
+              callable: 'createReview',
+              interxType: 'EXTRINSIC',
+              inputParams: [
+                {
+                  type: 'u32',
+                  value: form.values.rating.toString(),
+                },
+                {
+                  type: 'H256',
+                  value:
+                    '9834876dcfb05cb167a5c24953eba58c4ac89b1adf57f28f2f9d09af107ee8f0',
+                },
+                {
+                  type: 'Bytes',
+                  value: form.values.title,
+                },
+                {
+                  type: 'Bytes',
+                  value: form.values.like,
+                },
+                {
+                  type: 'Bytes',
+                  value: form.values.dislike,
+                },
+              ],
+              paramFields: [
+                {
+                  name: 'star',
+                  type: 'u32',
+                  optional: false,
+                },
+                {
+                  name: 'appId',
+                  type: 'H256',
+                  optional: false,
+                },
+                {
+                  name: 'title',
+                  type: 'Bytes',
+                  optional: false,
+                },
+                {
+                  name: 'cons',
+                  type: 'Bytes',
+                  optional: false,
+                },
+                {
+                  name: 'pros',
+                  type: 'Bytes',
+                  optional: false,
+                },
+              ],
+            }}
+            label='Submit'
+          />
         </Stack>
       </form>
     </Modal>

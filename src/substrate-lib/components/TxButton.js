@@ -6,7 +6,7 @@ import { web3FromSource } from '@polkadot/extension-dapp'
 import { useSubstrateState } from '../'
 import utils from '../utils'
 
-function TxButton({
+function TxButton ({
   attrs = null,
   color = 'blue',
   disabled = false,
@@ -22,7 +22,7 @@ function TxButton({
   const [sudoKey, setSudoKey] = useState(null)
 
   const { palletRpc, callable, inputParams, paramFields } = attrs
-
+  console.log('attrs', attrs)
   const isQuery = () => type === 'QUERY'
   const isSudo = () => type === 'SUDO-TX'
   const isUncheckedSudo = () => type === 'UNCHECKED-SUDO-TX'
@@ -265,7 +265,7 @@ function TxButton({
       basic
       color={color}
       style={style}
-      type="submit"
+      type='submit'
       onClick={transaction}
       disabled={
         disabled ||
@@ -302,14 +302,14 @@ TxButton.propTypes = {
   }).isRequired,
 }
 
-function TxGroupButton(props) {
+function TxGroupButton (props) {
   return (
     <Button.Group>
-      <TxButton label="Unsigned" type="UNSIGNED-TX" color="grey" {...props} />
+      <TxButton label='Unsigned' type='UNSIGNED-TX' color='grey' {...props} />
       <Button.Or />
-      <TxButton label="Signed" type="SIGNED-TX" color="blue" {...props} />
+      <TxButton label='Signed' type='SIGNED-TX' color='blue' {...props} />
       <Button.Or />
-      <TxButton label="SUDO" type="SUDO-TX" color="red" {...props} />
+      <TxButton label='SUDO' type='SUDO-TX' color='red' {...props} />
     </Button.Group>
   )
 }

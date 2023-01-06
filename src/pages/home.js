@@ -105,7 +105,13 @@ const Home = () => {
             </List>
 
             <Group mt={30}>
-              <Button radius='xl' size='md' className={classes.control}>
+              <Button
+                radius='xl'
+                size='md'
+                className={classes.control}
+                component='a'
+                href='/reviews'
+              >
                 Get started
               </Button>
             </Group>
