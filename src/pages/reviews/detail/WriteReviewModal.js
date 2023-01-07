@@ -10,6 +10,7 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
+import sha256 from 'crypto-js/sha256'
 import { useEffect, useState } from 'react'
 import { TxButton } from '../../../substrate-lib/components'
 
@@ -152,8 +153,7 @@ const WriteReviewModal = ({
                 },
                 {
                   type: 'H256',
-                  value:
-                    '9834876dcfb05cb167a5c24953eba58c4ac89b1adf57f28f2f9d09af107ee8f0',
+                  value: sha256(productName).toString(),
                 },
                 {
                   type: 'Bytes',

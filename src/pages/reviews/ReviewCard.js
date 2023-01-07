@@ -69,7 +69,7 @@ const ReviewCard = body => {
               />
             </Paper>
             <div>
-              <Text weight={500} component='a' href={`/reviews/tesla`}>
+              <Text weight={500} component='a' href={`/reviews/acala`}>
                 Acala network
               </Text>
               <Text size='xs' color='dimmed'>
