@@ -7,6 +7,7 @@ import {
   createStyles,
   Button,
   Paper,
+  Rating,
 } from '@mantine/core'
 
 import ReviewCardDescription from './ReviewCardDescription'
@@ -52,9 +53,10 @@ const useStyles = createStyles(theme => ({
   },
 }))
 
-const ReviewCard = body => {
+const ReviewCard = ({ id, hash, name, owner, star = 0, symbol, createdAt }) => {
   const { classes } = useStyles()
 
+  const linkToDetail = `/reviews/${hash}`
   return (
     <Card withBorder radius='md' className={classes.card}>
       <Card.Section px='md'>
@@ -63,14 +65,14 @@ const ReviewCard = body => {
             <Paper shadow='md' p='sm' withBorder>
               <Image
                 src='https://s2.coinmarketcap.com/static/img/coins/64x64/6756.png'
-                alt='Acala network'
+                alt={symbol}
                 width={100}
                 height={100}
               />
             </Paper>
             <div>
-              <Text weight={500} component='a' href={`/reviews/acala`}>
-                Acala network
+              <Text weight={500} component='a' href={linkToDetail}>
+                {name}
               </Text>
               <Text size='xs' color='dimmed'>
                 Your best financial application
@@ -88,21 +90,15 @@ const ReviewCard = body => {
       <Card.Section className={classes.section}>
         <Group spacing={30} position='apart'>
           <div>
-            <Text size='xl' weight={700} sx={{ lineHeight: 1 }}>
-              $0
-            </Text>
-            <Text
-              size='sm'
-              color='dimmed'
-              weight={500}
-              sx={{ lineHeight: 1 }}
-              mt={3}
-            >
-              free
-            </Text>
+            <Rating value={star} readOnly />
           </div>
 
-          <Button radius='xl' style={{ flex: 1, maxWidth: 200 }}>
+          <Button
+            radius='xl'
+            style={{ flex: 1, maxWidth: 200 }}
+            component='a'
+            href={linkToDetail}
+          >
             Try it now
           </Button>
         </Group>

@@ -1,5 +1,14 @@
-import { Button, Divider, Stack } from '@mantine/core'
-import sha256 from 'crypto-js/sha256'
+import {
+  Avatar,
+  Button,
+  Card,
+  Divider,
+  Group,
+  Rating,
+  Stack,
+  Text,
+  Title,
+} from '@mantine/core'
 import { useCallback, useEffect, useState } from 'react'
 import { useSubstrateState } from '../../../substrate-lib'
 import WriteReviewModal from './WriteReviewModal'
@@ -10,31 +19,61 @@ const ReviewByUsers = ({ productName }) => {
   const [reviews, setReviews] = useState(null)
 
   const callApi = useCallback(async () => {
-    await api.query.reviewModule.reviewsOwnedByApp(
-      sha256(productName).toString(),
-      result => (result.isNone ? setReviews([]) : setReviews(reviews))
-    )
-  }, [api])
+    let results = await api.query.reviewModule.reviewsOwnedByApp(productName)
+    results = results.map(item => item.toString())
+    let _reviews = []
+
+    for (const reviewId of results) {
+      const review = await api.query.reviewModule.reviews(reviewId)
+      _reviews = [..._reviews, review.toHuman()]
+    }
+    setReviews(_reviews)
+  }, [api, productName])
 
   useEffect(() => {
     callApi()
   }, [callApi])
 
-  console.log('reviews', reviews)
-
   return (
     <Stack sx={{ width: '100%' }}>
-      <div>{reviews}</div>
-      <Divider />
+      <Group position='apart'>
+        <Title order={2}>Reviews</Title>
+        <Button onClick={() => setOpened(true)}>Write a review</Button>
+      </Group>
+      <div>
+        {reviews?.map(item => (
+          <Card withBorder>
+            <Card.Section>
+              <Group p='md' position='apart'>
+                <Rating value={item.star} readOnly />
+                <Group>
+                  <Avatar src={null} alt='no image here' />
+                  <div style={{ width: 120 }}>
+                    <Text truncate>{item.owner}</Text>
+                  </div>
+                </Group>
+              </Group>
+            </Card.Section>
+            <Stack>
+              <Title order={3}>{item.title}</Title>
 
-      <Button onClick={() => setOpened(true)}>Write a review</Button>
+              <Text weight={500}>What do you like?</Text>
+              <Text>{item.pros}</Text>
+              <Divider />
+              <Text weight={500}>What do you dislike?</Text>
+              <Text>{item.cons}</Text>
+            </Stack>
+          </Card>
+        ))}
+      </div>
+
       <WriteReviewModal
         opened={opened}
         onClose={() => {
           setOpened(false)
           callApi()
         }}
-        productName='Acala Network'
+        productName={productName}
       />
     </Stack>
   )

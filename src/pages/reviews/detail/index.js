@@ -1,15 +1,17 @@
 import { Container, Divider, Stack } from '@mantine/core'
+import { useParams } from 'react-router-dom'
 import ProductOverview from './product'
 import ReviewByUsers from './ReviewByUsers'
 
 const ReviewDetail = () => {
+  const { reviewId } = useParams()
   return (
     <Stack pb='xl'>
       <ProductOverview />
-      <Container>
+      <Divider />
+      <Container sx={{ width: '100%' }}>
         <Stack size='lg' mt='md' sx={{ width: '100%' }}>
-          <Divider />
-          <ReviewByUsers />
+          <ReviewByUsers productName={reviewId} />
         </Stack>
       </Container>
     </Stack>

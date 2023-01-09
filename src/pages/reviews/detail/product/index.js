@@ -117,12 +117,6 @@ function ProductOverview () {
       <Card.Section mt='md' className={classes.info}>
         <DetailCardDescription />
       </Card.Section>
-
-      <div className={classes.info}>
-        <Text fz={22} fw={600}>
-          Review
-        </Text>
-      </div>
     </div>
   )
 }

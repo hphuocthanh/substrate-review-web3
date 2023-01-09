@@ -1,22 +1,28 @@
 import { Container, Divider, Grid, Stack, Title } from '@mantine/core'
+import { useCallback, useEffect, useState } from 'react'
+import { useSubstrateState } from '../../substrate-lib'
 import Categories from './Categories'
 import ReviewCard from './ReviewCard'
 
-const mockData = [
-  {
-    image:
-      'https://images.unsplash.com/photo-1602080858428-57174f9431cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    category: 'technology',
-    title: 'The best laptop for Frontend engineers in 2022',
-    date: 'Feb 6th',
-    author: {
-      name: 'Elsa Brown',
-      avatar:
-        'https://images.unsplash.com/photo-1628890923662-2cb23c2e0cfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80',
-    },
-  },
-]
 const ReviewList = () => {
+  const { api } = useSubstrateState()
+  const [apps, setApps] = useState(null)
+
+  const callApi = useCallback(async () => {
+    const result = await api.query.palletApps.apps.entries()
+    const apps = result.map(([key, exposure]) => {
+      return {
+        hash: key.args[0].toHuman(),
+        ...exposure.toHuman(),
+      }
+    })
+    setApps(apps)
+  }, [api])
+
+  useEffect(() => {
+    callApi()
+  }, [callApi])
+
   return (
     <Stack>
       <Container size='lg' mt='md' sx={{ width: '100%' }}>
@@ -28,8 +34,8 @@ const ReviewList = () => {
             <Categories />
           </Grid.Col>
           <Grid.Col span={9}>
-            {mockData?.map(item => (
-              <ReviewCard {...item} key={item.title} />
+            {apps?.map(item => (
+              <ReviewCard {...item} key={item.hash} />
             ))}
           </Grid.Col>
         </Grid>
