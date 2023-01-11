@@ -15,6 +15,7 @@ function TxButton ({
   style = null,
   type = 'QUERY',
   txOnClickHandler = null,
+  loading = false,
 }) {
   // Hooks
   const { api, currentAccount } = useSubstrateState()
@@ -97,9 +98,10 @@ function TxButton ({
 
   const signedTx = async () => {
     const fromAcct = await getFromAcct()
+    console.log('paramFields', paramFields)
+    console.log('inputParams', inputParams)
     const transformed = transformParams(paramFields, inputParams)
     // transformed can be empty parameters
-
     const txExecute = transformed
       ? api.tx[palletRpc][callable](...transformed)
       : api.tx[palletRpc][callable]()
@@ -266,6 +268,7 @@ function TxButton ({
       style={style}
       type='submit'
       onClick={transaction}
+      loading={loading}
       disabled={
         disabled ||
         !palletRpc ||

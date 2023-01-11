@@ -12,6 +12,7 @@ import Home from './pages/home'
 import ReviewList from './pages/reviews'
 
 import ReviewDetail from './pages/reviews/detail'
+import MyApps from './pages/my-apps'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             element: <ReviewDetail />,
           },
         ],
+      },
+      {
+        path: 'my-apps',
+        element: <MyApps />,
       },
     ],
   },

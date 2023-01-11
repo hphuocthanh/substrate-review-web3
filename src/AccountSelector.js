@@ -68,10 +68,17 @@ function Main (props) {
           </Menu.Item>
           <Menu.Item
             as='a'
-            href='reviews'
+            href='/reviews'
             active={location.pathname.includes('/reviews')}
           >
             Reviews
+          </Menu.Item>
+          <Menu.Item
+            as='a'
+            href='/my-apps'
+            active={location.pathname.includes('/my-apps')}
+          >
+            My Apps
           </Menu.Item>
         </Menu.Menu>
         <Menu.Menu position='right' style={{ alignItems: 'center' }}>
