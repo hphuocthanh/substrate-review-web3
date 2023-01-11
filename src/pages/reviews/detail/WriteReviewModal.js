@@ -10,7 +10,6 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
-import sha256 from 'crypto-js/sha256'
 import { useEffect, useState } from 'react'
 import { TxButton } from '../../../substrate-lib/components'
 
@@ -46,6 +45,7 @@ const WriteReviewModal = ({
     }
   }, [status])
 
+  const loading = !!status && !status?.includes('Finalized')
   return (
     <Modal
       opened={opened}
@@ -117,7 +117,7 @@ const WriteReviewModal = ({
             {...form.getInputProps('orgSize')}
           />
           <Select
-            label='What was your organization size when using it?'
+            label='What is your primary role when using it?'
             placeholder='Pick one'
             searchable
             required
@@ -153,7 +153,7 @@ const WriteReviewModal = ({
                 },
                 {
                   type: 'H256',
-                  value: sha256(productName).toString(),
+                  value: productName,
                 },
                 {
                   type: 'Bytes',
@@ -197,6 +197,7 @@ const WriteReviewModal = ({
               ],
             }}
             label='Submit'
+            loading={loading}
           />
         </Stack>
       </form>

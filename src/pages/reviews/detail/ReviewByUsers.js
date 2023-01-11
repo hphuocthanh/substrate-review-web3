@@ -22,7 +22,6 @@ const ReviewByUsers = ({ productName }) => {
     let results = await api.query.reviewModule.reviewsOwnedByApp(productName)
     results = results.map(item => item.toString())
     let _reviews = []
-
     for (const reviewId of results) {
       const review = await api.query.reviewModule.reviews(reviewId)
       _reviews = [..._reviews, review.toHuman()]
@@ -42,7 +41,7 @@ const ReviewByUsers = ({ productName }) => {
       </Group>
       <div>
         {reviews?.map(item => (
-          <Card withBorder>
+          <Card withBorder key={item.appId}>
             <Card.Section>
               <Group p='md' position='apart'>
                 <Rating value={item.star} readOnly />
@@ -71,7 +70,7 @@ const ReviewByUsers = ({ productName }) => {
         opened={opened}
         onClose={() => {
           setOpened(false)
-          callApi()
+          setTimeout(callApi, 250)
         }}
         productName={productName}
       />
