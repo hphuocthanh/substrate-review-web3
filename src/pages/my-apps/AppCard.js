@@ -93,7 +93,7 @@ const AppCard = ({
         {title}
       </Text>
 
-      <Text size='sm' color='dimmed' lineClamp={4}>
+      <Text size='sm' color='dimmed' lineClamp={3} sx={{ minHeight: 45 }}>
         {description}
       </Text>
 

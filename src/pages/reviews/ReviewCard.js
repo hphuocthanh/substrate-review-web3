@@ -53,7 +53,21 @@ const useStyles = createStyles(theme => ({
   },
 }))
 
-const ReviewCard = ({ id, hash, name, owner, star = 0, symbol, createdAt }) => {
+const ReviewCard = ({
+  id,
+  hash,
+  name,
+  owner,
+  star = 0,
+  symbol,
+  createdAt,
+  overview,
+  overall,
+  security,
+  transaction,
+  img,
+  tag,
+}) => {
   const { classes } = useStyles()
 
   const linkToDetail = `/reviews/${hash}`
@@ -64,7 +78,10 @@ const ReviewCard = ({ id, hash, name, owner, star = 0, symbol, createdAt }) => {
           <Group>
             <Paper shadow='md' p='sm' withBorder>
               <Image
-                src='https://s2.coinmarketcap.com/static/img/coins/64x64/6756.png'
+                src={
+                  img ??
+                  'https://s2.coinmarketcap.com/static/img/coins/64x64/6756.png'
+                }
                 alt={symbol}
                 width={100}
                 height={100}
@@ -75,7 +92,7 @@ const ReviewCard = ({ id, hash, name, owner, star = 0, symbol, createdAt }) => {
                 {name}
               </Text>
               <Text size='xs' color='dimmed'>
-                Your best financial application
+                {tag}
               </Text>
             </div>
           </Group>
@@ -84,7 +101,12 @@ const ReviewCard = ({ id, hash, name, owner, star = 0, symbol, createdAt }) => {
       </Card.Section>
 
       <Card.Section className={classes.section} mt='md'>
-        <ReviewCardDescription />
+        <ReviewCardDescription
+          overview={overview}
+          overall={overall}
+          security={security}
+          transaction={transaction}
+        />
       </Card.Section>
 
       <Card.Section className={classes.section}>

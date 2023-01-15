@@ -4,7 +4,7 @@ import { showNotification } from '@mantine/notifications'
 import { useEffect, useState } from 'react'
 import { TxButton } from '../../substrate-lib/components'
 
-const SubmitForReviewModal = ({ opened = false, onClose }) => {
+const SubmitForReviewModal = ({ opened = false, onClose, onCloseModal }) => {
   const [status, setStatus] = useState(null)
   const form = useForm({
     initialValues: {
@@ -29,6 +29,7 @@ const SubmitForReviewModal = ({ opened = false, onClose }) => {
   return (
     <Modal
       opened={opened}
+      onClose={onCloseModal}
       centered
       size='xl'
       title='Submit for review'

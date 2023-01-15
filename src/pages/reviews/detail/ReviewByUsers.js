@@ -40,30 +40,32 @@ const ReviewByUsers = ({ productName }) => {
         <Button onClick={() => setOpened(true)}>Write a review</Button>
       </Group>
       <div>
-        {reviews?.map(item => (
-          <Card withBorder key={item.appId}>
-            <Card.Section>
-              <Group p='md' position='apart'>
-                <Rating value={item.star} readOnly />
-                <Group>
-                  <Avatar src={null} alt='no image here' />
-                  <div style={{ width: 120 }}>
-                    <Text truncate>{item.owner}</Text>
-                  </div>
+        <Stack>
+          {reviews?.map(item => (
+            <Card withBorder key={item.appId}>
+              <Card.Section>
+                <Group p='md' position='apart'>
+                  <Rating value={item.star} readOnly />
+                  <Group>
+                    <Avatar src={null} alt='no image here' />
+                    <div style={{ width: 120 }}>
+                      <Text truncate>{item.owner}</Text>
+                    </div>
+                  </Group>
                 </Group>
-              </Group>
-            </Card.Section>
-            <Stack>
-              <Title order={3}>{item.title}</Title>
+              </Card.Section>
+              <Stack>
+                <Title order={3}>{item.title}</Title>
 
-              <Text weight={500}>What do you like?</Text>
-              <Text>{item.pros}</Text>
-              <Divider />
-              <Text weight={500}>What do you dislike?</Text>
-              <Text>{item.cons}</Text>
-            </Stack>
-          </Card>
-        ))}
+                <Text weight={500}>What do you like?</Text>
+                <Text>{item.pros}</Text>
+                <Divider />
+                <Text weight={500}>What do you dislike?</Text>
+                <Text>{item.cons}</Text>
+              </Stack>
+            </Card>
+          ))}
+        </Stack>
       </div>
 
       <WriteReviewModal

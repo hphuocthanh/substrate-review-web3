@@ -51,6 +51,7 @@ const MyApps = () => {
           ])
           setIsSubmitOpen(false)
         }}
+        onCloseModal={() => setIsSubmitOpen(false)}
       />
     </Stack>
   )

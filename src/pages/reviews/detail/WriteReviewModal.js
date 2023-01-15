@@ -2,7 +2,6 @@ import {
   Divider,
   Modal,
   Rating,
-  Select,
   Stack,
   Text,
   Textarea,
@@ -25,21 +24,16 @@ const WriteReviewModal = ({
       title: '',
       like: '',
       dislike: '',
-      purposes: '',
-      org: '',
-      orgSize: '',
-      industry: '',
-      role: '',
-      jobTitle: '',
+      transactionPerformance: 0,
+      cost: 0,
     },
   })
 
   useEffect(() => {
-    console.log('status', status)
     if (status?.includes('Finalized')) {
       showNotification({
-        title: <></>,
-        message: 'Review success',
+        title: <>Review success</>,
+        message: '+10 Token has been deposited to your wallet. Check it out!',
       })
       onClose()
     }
@@ -64,7 +58,7 @@ const WriteReviewModal = ({
           </Text>
           <Divider />
 
-          <Text>
+          <Text weight={500}>
             How likely is it that you would recommend this product to a friend
             or a colleague?{' '}
             <Text span color='red'>
@@ -91,53 +85,20 @@ const WriteReviewModal = ({
             {...form.getInputProps('dislike')}
           />
 
-          <Select
-            label='For which purpose do you use the product?'
-            placeholder='Pick one'
-            searchable
-            required
-            nothingFound='No options'
-            data={['Education', 'Personal', 'Business']}
-            {...form.getInputProps('purposes')}
-          />
-          <TextInput
-            name='org'
-            label='At which organization do you use it?'
-            required
-            {...form.getInputProps('org')}
-          />
-
-          <Select
-            label='What was your organization size when using it?'
-            placeholder='Pick one'
-            searchable
-            required
-            nothingFound='No options'
-            data={['0 - 10', '10 - 50', '50 - 100', '100 - 1000', '1000+']}
-            {...form.getInputProps('orgSize')}
-          />
-          <Select
-            label='What is your primary role when using it?'
-            placeholder='Pick one'
-            searchable
-            required
-            nothingFound='No options'
-            data={[
-              'User',
-              'Admin',
-              'Consultant',
-              'Sponsor',
-              'Tech Writer',
-              'Other',
-            ]}
-            {...form.getInputProps('role')}
-          />
-          <TextInput
-            name='jobTitle'
-            label='What is your current job title?'
-            required
-            {...form.getInputProps('jobTitle')}
-          />
+          <Text weight={500}>
+            Rate the transaction performance
+            <Text span color='red'>
+              *
+            </Text>
+          </Text>
+          <Rating size='xl' {...form.getInputProps('transactionPerformance')} />
+          <Text weight={500}>
+            Rate the cost efficiency
+            <Text span color='red'>
+              *
+            </Text>
+          </Text>
+          <Rating size='xl' {...form.getInputProps('cost')} />
 
           <TxButton
             type='SIGNED-TX'

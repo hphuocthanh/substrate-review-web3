@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useSubstrateState } from '../../substrate-lib'
 import Categories from './Categories'
 import ReviewCard from './ReviewCard'
+import reviews from './reviews'
 
 const ReviewList = () => {
   const { api } = useSubstrateState()
@@ -13,6 +14,10 @@ const ReviewList = () => {
     const apps = result.map(([key, exposure]) => {
       return {
         hash: key.args[0].toHuman(),
+        overall: 10,
+        overview: 'A great application on Substrate',
+        security: 9,
+        transaction: 9,
         ...exposure.toHuman(),
       }
     })
@@ -24,7 +29,7 @@ const ReviewList = () => {
   }, [callApi])
 
   return (
-    <Stack>
+    <Stack pb='xl'>
       <Container size='lg' mt='md' sx={{ width: '100%' }}>
         <Title order={2}>Current Projects</Title>
         <Divider my='lg' />
@@ -34,9 +39,14 @@ const ReviewList = () => {
             <Categories />
           </Grid.Col>
           <Grid.Col span={9}>
-            {apps?.map(item => (
-              <ReviewCard {...item} key={item.hash} />
-            ))}
+            <Stack>
+              {apps?.map(item => (
+                <ReviewCard {...item} key={item.hash} />
+              ))}
+              {reviews.map(item => (
+                <ReviewCard {...item} key={item.hash} />
+              ))}
+            </Stack>
           </Grid.Col>
         </Grid>
       </Container>
